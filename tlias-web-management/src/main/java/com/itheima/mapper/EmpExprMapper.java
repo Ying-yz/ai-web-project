@@ -9,5 +9,5 @@ import java.util.List;
 public interface EmpExprMapper {
 
 
-    void insert(List<EmpExpr> emprList);
+    void insert(List<EmpExpr> exprList);
 }

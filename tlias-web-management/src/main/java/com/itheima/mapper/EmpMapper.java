@@ -16,6 +16,6 @@ public interface EmpMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into emp(username,name,gender,job,phone,salary,image,entry_date,dept_id,create_time,update_time) " +
-            "values(#{username},#{name},#{gender},#{job},#{phone},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime} ")
-    void inset(Emp emp);
+            "values(#{username},#{name},#{gender},#{job},#{phone},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
+    void insert(Emp emp);
 }
