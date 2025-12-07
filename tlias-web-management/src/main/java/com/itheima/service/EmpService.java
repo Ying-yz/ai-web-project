@@ -6,4 +6,7 @@ import com.itheima.pojo.PageResult;
 
 public interface EmpService {
     PageResult<Emp> page(EmpQueryPrama empQueryPrama);
+
+    void save(Emp emp);
+
 }
