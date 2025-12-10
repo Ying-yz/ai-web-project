@@ -10,4 +10,6 @@ public interface EmpExprMapper {
 
 
     void insert(List<EmpExpr> exprList);
+
+    void deleteByEmpId(List<Integer> empIds);
 }
