@@ -30,4 +30,6 @@ public interface EmpMapper {
 
     @MapKey("pos")
     List<Map<String, Object>> getEmpJobData();
+
+    List<Map<String, Object>> getEmpGenderData();
 }

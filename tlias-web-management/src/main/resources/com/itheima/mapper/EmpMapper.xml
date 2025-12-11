@@ -100,4 +100,10 @@
         from emp
         group by job order by num
     </select>
+    <select id="getEmpGenderData" resultType="java.util.Map">
+        select
+            if (gender = 1, '男性员工', '女性员工') as name,
+            count( * ) as value
+        from emp group by gender
+    </select>
 </mapper>
