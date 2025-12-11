@@ -33,4 +33,6 @@ public interface EmpMapper {
 
     @Select("select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp")
     List<Emp> selectAll();
+    @Select("select count(*) from emp where dept_id = #{deptId}")
+    Long countByDeptId(Integer id);
 }

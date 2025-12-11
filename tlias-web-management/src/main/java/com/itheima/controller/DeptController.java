@@ -28,11 +28,20 @@ public class DeptController {
 
 
     @DeleteMapping
-    public Result delete(Integer id){
+    public Result delete(Integer id) throws Exception {
 
-        deptService.deleteById(id);
+        try {
+            deptService.deleteById(id);
 
-        return Result.success();
+            return Result.success();
+
+        } catch (Exception e) {
+            // 🚨 捕获到了 "对不起，当前部门下有员工..." 这个异常
+            e.printStackTrace(); // 在后台控制台打印报错日志（给程序员看）
+
+            // 👇【关键】把异常里的文字取出来，塞给 Result 返回给前端
+            return Result.error(e.getMessage());
+        }
     }
 
     @PostMapping

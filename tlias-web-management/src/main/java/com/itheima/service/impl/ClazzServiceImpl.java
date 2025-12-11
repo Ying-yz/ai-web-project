@@ -3,6 +3,7 @@ package com.itheima.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.ClazzMapper;
+import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.Clazz;
 import com.itheima.pojo.PageResult;
 import com.itheima.service.ClazzService;
@@ -34,15 +35,28 @@ public class ClazzServiceImpl implements ClazzService {
     }
 
     @Override
-    public void insert(Clazz clazz) {
+    public void save(Clazz clazz) {
 
         clazz.setCreateTime(LocalDateTime.now());
         clazz.setUpdateTime(LocalDateTime.now());
-        clazzMapper.insert(clazz);
+        clazzMapper.save(clazz);
     }
 
     @Override
     public Clazz selectById(Integer id) {
         return clazzMapper.selectById(id);
+    }
+
+    @Override
+    public void update(Clazz clazz) {
+        clazz.setUpdateTime(LocalDateTime.now());
+        clazzMapper.updateById(clazz);
+    }
+
+    @Override
+    public List<Clazz> selectAll() {
+
+
+        return clazzMapper.selectAll();
     }
 }

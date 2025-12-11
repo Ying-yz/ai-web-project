@@ -1,6 +1,7 @@
 package com.itheima.service.impl;
 
 import com.itheima.mapper.DeptMapper;
+import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.Dept;
 import com.itheima.service.DeptService;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
 
     private final DeptMapper deptMapper;
+    private final EmpMapper empMapper;
 
-    public DeptServiceImpl(DeptMapper deptMapper) {
+    public DeptServiceImpl(DeptMapper deptMapper, EmpMapper empMapper) {
         this.deptMapper = deptMapper;
+        this.empMapper = empMapper;
     }
 
     @Override
@@ -24,8 +27,13 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id) throws Exception {
+        Long count = empMapper.countByDeptId(id);
 
+
+        if (count > 0) {
+            throw new Exception("对不起，当前部门下有员工，不能直接删除！");
+        }
         deptMapper.deleteById(id);
     }
 
