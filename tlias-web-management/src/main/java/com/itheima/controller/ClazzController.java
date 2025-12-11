@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/clazzs")
@@ -38,11 +40,11 @@ public class ClazzController {
     }
 
     @PostMapping
-    public Result update(@RequestBody Clazz clazz) {
+    public Result save(@RequestBody Clazz clazz) {
 
         log.info("新增班级: {}", clazz);
 
-        clazzService.insert(clazz);
+        clazzService.save(clazz);
 
         return Result.success();
     }
@@ -55,5 +57,19 @@ public class ClazzController {
         Clazz clazz = clazzService.selectById(id);
 
         return Result.success(clazz);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Clazz clazz){
+        clazzService.update(clazz);
+        return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result selectAll(){
+
+        List<Clazz> clazzList = clazzService.selectAll();
+
+        return Result.success(clazzList);
     }
 }

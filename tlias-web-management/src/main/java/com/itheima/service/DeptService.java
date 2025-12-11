@@ -9,7 +9,7 @@ import java.util.List;
 public interface DeptService {
     List<Dept> findAll();
 
-    void deleteById(Integer id);
+    void deleteById(Integer id) throws Exception;
 
     void insert(Dept dept);
 
