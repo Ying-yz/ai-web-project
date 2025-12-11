@@ -2,10 +2,7 @@ package com.itheima.mapper;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpQueryPrama;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -31,5 +28,9 @@ public interface EmpMapper {
     @MapKey("pos")
     List<Map<String, Object>> getEmpJobData();
 
+    @MapKey("name")
     List<Map<String, Object>> getEmpGenderData();
+
+    @Select("select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp")
+    List<Emp> selectAll();
 }
