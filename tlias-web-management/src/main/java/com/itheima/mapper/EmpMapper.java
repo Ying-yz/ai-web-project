@@ -3,10 +3,12 @@ package com.itheima.mapper;
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpQueryPrama;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -25,4 +27,7 @@ public interface EmpMapper {
     Emp selectById(Integer id);
 
     void updateById(Emp emp);
+
+    @MapKey("pos")
+    List<Map<String, Object>> getEmpJobData();
 }
