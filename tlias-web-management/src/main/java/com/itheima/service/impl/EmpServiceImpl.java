@@ -3,7 +3,6 @@ package com.itheima.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.EmpExprMapper;
-import com.itheima.mapper.EmpLogMapper;
 import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.*;
 import com.itheima.service.EmpLogService;
@@ -25,8 +24,7 @@ public class EmpServiceImpl implements EmpService {
 
     private final EmpLogService empLogService;
 
-    public EmpServiceImpl(EmpMapper empMapper, EmpExprMapper empExprMapper, EmpLogMapper empLogMapper,
-            EmpLogService empLogMapper1, EmpLogService empLogService) {
+    public EmpServiceImpl(EmpMapper empMapper, EmpExprMapper empExprMapper, EmpLogService empLogService) {
         this.empMapper = empMapper;
         this.empExprMapper = empExprMapper;
         this.empLogService = empLogService;
@@ -81,7 +79,6 @@ public class EmpServiceImpl implements EmpService {
         // 2.批量删除员工工作经历
         empExprMapper.deleteByEmpId(ids);
 
-
     }
 
     @Override
@@ -93,15 +90,15 @@ public class EmpServiceImpl implements EmpService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void update(Emp emp) {
-        //1.修改员工基本信息
+        // 1.修改员工基本信息
         emp.setUpdateTime(LocalDateTime.now());
         empMapper.updateById(emp);
-        //2.修改员工工作经历
-        //2.1.删除员工工作经历
+        // 2.修改员工工作经历
+        // 2.1.删除员工工作经历
         empExprMapper.deleteByEmpId(Arrays.asList(emp.getId()));
-        //2.2.添加员工工作经历
+        // 2.2.添加员工工作经历
         List<EmpExpr> exprList = emp.getExprList();
-        if (! CollectionUtils.isEmpty(exprList)) {
+        if (!CollectionUtils.isEmpty(exprList)) {
             exprList.forEach(empExpr -> {
                 empExpr.setEmpId(emp.getId());
                 empExprMapper.insert(exprList);
