@@ -66,6 +66,10 @@ public class DeptController {
         deptService.update(dept);
 
         return Result.success();
+
     }
+
+
+
 
 }
