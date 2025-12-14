@@ -1,12 +1,10 @@
 package com.itheima.controller;
 
-import com.itheima.pojo.Clazz;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.Result;
 import com.itheima.pojo.Student;
 import com.itheima.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

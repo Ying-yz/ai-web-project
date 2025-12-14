@@ -35,4 +35,6 @@ public interface EmpMapper {
     List<Emp> selectAll();
     @Select("select count(*) from emp where dept_id = #{deptId}")
     Long countByDeptId(Integer id);
+    @Select("select id, username, name from emp where username = #{username} and password = #{password}")
+    Emp selectUP(Emp emp);
 }

@@ -2,6 +2,7 @@ package com.itheima.service;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpQueryPrama;
+import com.itheima.pojo.Login;
 import com.itheima.pojo.PageResult;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface EmpService {
     void update(Emp emp);
 
     List<Emp> selectAll();
+
+    Login login(Emp emp);
 }

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.stream;
-
 @Service
 public class ReportServiceImpl implements ReportService {
     @Autowired
