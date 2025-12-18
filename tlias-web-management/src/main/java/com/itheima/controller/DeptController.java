@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Dept;
 import com.itheima.pojo.Result;
 import com.itheima.service.DeptService;
@@ -27,6 +28,7 @@ public class DeptController {
     }
 
 
+    @Log
     @DeleteMapping
     public Result delete(Integer id) throws Exception {
 
@@ -44,8 +46,9 @@ public class DeptController {
         }
     }
 
+    @Log
     @PostMapping
-    public Result add(@RequestBody Dept dept){
+    public Result save(@RequestBody Dept dept){
 
         deptService.insert(dept);
 
@@ -60,6 +63,7 @@ public class DeptController {
         return Result.success(dept);
     }
 
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept){
 

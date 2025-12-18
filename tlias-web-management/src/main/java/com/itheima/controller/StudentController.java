@@ -19,19 +19,18 @@ public class StudentController {
 
     @GetMapping
     public Result page(String name,
-                       Integer degree,
-                       Integer clazzId,
-                       @RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize){
+            Integer degree,
+            Integer clazzId,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageResult<Student> PageResult = studentService.page(name,degree,clazzId,page,pageSize);
-
+        PageResult<Student> PageResult = studentService.page(name, degree, clazzId, page, pageSize);
 
         return Result.success(PageResult);
     }
 
     @PostMapping
-    public Result save(@RequestBody Student student){
+    public Result save(@RequestBody Student student) {
 
         studentService.save(student);
 
@@ -39,7 +38,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Result select(@PathVariable Integer id){
+    public Result select(@PathVariable Integer id) {
 
         Student student = studentService.selectById(id);
 
@@ -47,7 +46,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{ids}")
-    public Result delete(@PathVariable List<Integer> ids){
+    public Result delete(@PathVariable List<Integer> ids) {
 
         studentService.deleteById(ids);
 
@@ -55,7 +54,7 @@ public class StudentController {
     }
 
     @PutMapping
-    public Result update(@RequestBody Student student){
+    public Result update(@RequestBody Student student) {
 
         studentService.update(student);
 
@@ -63,10 +62,11 @@ public class StudentController {
     }
 
     @PutMapping("/violation/{id}/{score}")
-    public Result violationHandle(@PathVariable Integer id, @PathVariable Integer score){
+    public Result violationHandle(@PathVariable Integer id, @PathVariable Integer score) {
 
-        studentService.violation(id,score);
+        studentService.violation(id, score);
 
         return Result.success();
     }
+
 }

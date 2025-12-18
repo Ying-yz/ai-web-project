@@ -1,6 +1,7 @@
 package com.itheima.filter;
 
 import com.itheima.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+
 @Slf4j
 @WebFilter
 public class LoginFilter implements Filter {
@@ -21,7 +23,7 @@ public class LoginFilter implements Filter {
         String requestURI = request.getRequestURI(); // /employee/login
 
         //2. 判断是否是登录请求, 如果路径中包含 /login, 说明是登录操作, 放行
-        if (requestURI.contains("/login")){
+        if (requestURI.contains("/login")) {
             log.info("登录请求, 放行");
             filterChain.doFilter(request, response);
             return;
@@ -31,7 +33,7 @@ public class LoginFilter implements Filter {
         String token = request.getHeader("token");
 
         //4. 判断token是否存在, 如果不存在, 说明用户没有登录, 返回错误信息(响应401状态码)
-        if (token == null || token.isEmpty()){
+        if (token == null || token.isEmpty()) {
             log.info("令牌为空, 响应401");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
@@ -39,16 +41,24 @@ public class LoginFilter implements Filter {
 
         //5. 如果token存在, 校验令牌, 如果校验失败 -&gt; 返回错误信息(响应401状态码)
         try {
-            JwtUtils.parseJWT(token);
+            // 解析令牌获取 Claims (包含你存入 JWT 的数据)
+            Claims claims = JwtUtils.parseJWT(token);
+
+            // 从 claims 中提取 id (假设你在登录生成 token 时存入的 key 是 "id")
+            Integer empId = (Integer) claims.get("id");
+
+            // 【关键一步】将员工 ID 存入 request 作用域
+            request.setAttribute("empId", empId);
+
+            log.info("令牌合法, 员工ID: {}, 放行", empId);
         } catch (Exception e) {
             log.info("令牌非法, 响应401");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
-        //6. 校验通过, 放行
-        log.info("令牌合法, 放行");
+// 6. 校验通过, 放行
         filterChain.doFilter(request, response);
-    }
 
+    }
 }
