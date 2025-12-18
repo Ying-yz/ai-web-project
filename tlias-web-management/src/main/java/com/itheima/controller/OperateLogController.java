@@ -14,7 +14,7 @@ public class OperateLogController {
     private OperateLogService operateLogService;
     @GetMapping("/page")
     public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize) {
+                       @RequestParam(defaultValue = "10") Integer pageSize){
 
         PageResult<OperateLog> pageResult = operateLogService.page(page, pageSize);
 

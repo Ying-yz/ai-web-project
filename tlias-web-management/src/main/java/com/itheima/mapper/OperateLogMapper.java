@@ -15,6 +15,8 @@ public interface OperateLogMapper {
             "values (#{operateEmpId}, #{operateTime}, #{className}, #{methodName}, #{methodParams}, #{returnValue}, #{costTime});")
     public void insert(OperateLog log);
 
-    @Select("select * from operate_log")
+    @Select("select l.*, e.name as operateEmpName " +
+            "from operate_log l " +
+            "left join emp e on l.operate_emp_id = e.id")
     List<OperateLog> list();
 }
